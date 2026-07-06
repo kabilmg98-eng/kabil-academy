@@ -516,6 +516,7 @@ body.light-theme .hero-heading span {
   background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
   opacity: 0;
   transition: opacity var(--transition-normal);
+  pointer-events: none;
 }
 
 .glass-card:hover {
