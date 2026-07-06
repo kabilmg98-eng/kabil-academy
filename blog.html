@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academy Blog | Kabil Academy</title>
+  <meta name="description" content="Read educational insights from Kabil Academy mentors. Articles on learning psychology, study techniques, memory improvement, and STEM innovation.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Background Animated Blobs -->
+  <div class="bg-glow-container">
+    <div class="bg-glow-blob blob-1"></div>
+    <div class="bg-glow-blob blob-2"></div>
+    <div class="bg-glow-blob blob-3"></div>
+  </div>
+
+  <!-- Header Section -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.png" alt="Kabil Academy Logo" style="height: 55px; width: auto; border-radius: 50%; border: 1px solid var(--border-color);">
+        KABIL<span>ACADEMY</span>
+      </a>
+      <button class="menu-btn" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="programs.html" class="nav-link">Programs</a></li>
+        <li><a href="admissions.html" class="nav-link">Admissions</a></li>
+        <li><a href="events.html" class="nav-link">Events</a></li>
+        <li><a href="blog.html" class="nav-link active">Blog</a></li>
+        <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon moon-icon"></i>
+          <i class="fas fa-sun sun-icon"></i>
+        </button>
+        <a href="contact.html#consultation" class="btn btn-outline" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">Free Consult</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Intro Header -->
+  <section class="page-intro">
+    <div class="container">
+      <span class="section-tag">Educational Insights</span>
+      <h1>Academy <span>Blog</span></h1>
+      <p>Scientific perspectives, study techniques, memory strategies, and parenting tips from our expert development coaches.</p>
+    </div>
+  </section>
+
+  <!-- Blog Listing -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="grid-3" style="gap: 2rem;">
+        
+        <!-- Post 1: Learning Psychology -->
+        <div class="glass-card blog-card fade-in">
+          <div class="blog-meta">
+            <span><i class="far fa-calendar-alt"></i> July 6, 2026</span>
+            <span><i class="far fa-clock"></i> 5 Min Read</span>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--royal-gold); font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">Learning Psychology</span>
+          <h3 style="font-family: var(--font-main-heading); font-size: 1.3rem; margin-bottom: 1rem; line-height: 1.3;">Understanding Cognitive Milestones in Modern Students</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem; flex-grow: 1;">How traditional classroom layouts trigger stress responses, and how we adapt cognitive pathways to nurture active curiosity and long-term memory retrieval.</p>
+          <button onclick="readArticle('learning-psych')" class="blog-read-more" style="background: none; border: none; cursor: pointer; text-align: left; padding: 0;">Read Full Article <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <!-- Post 2: Study Techniques -->
+        <div class="glass-card blog-card fade-in">
+          <div class="blog-meta">
+            <span><i class="far fa-calendar-alt"></i> June 28, 2026</span>
+            <span><i class="far fa-clock"></i> 4 Min Read</span>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--royal-gold); font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">Study Techniques</span>
+          <h3 style="font-family: var(--font-main-heading); font-size: 1.3rem; margin-bottom: 1rem; line-height: 1.3;">Spaced Repetitions & Active Recall Methods</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem; flex-grow: 1;">Discard the passive reading loops. Learn how flashcard metrics, the Feynman explanation framework, and Cornell notebook layouts lock concepts in your brain.</p>
+          <button onclick="readArticle('study-tech')" class="blog-read-more" style="background: none; border: none; cursor: pointer; text-align: left; padding: 0;">Read Full Article <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <!-- Post 3: Memory Improvement -->
+        <div class="glass-card blog-card fade-in">
+          <div class="blog-meta">
+            <span><i class="far fa-calendar-alt"></i> June 15, 2026</span>
+            <span><i class="far fa-clock"></i> 6 Min Read</span>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--royal-gold); font-weight: bold; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 0.5rem;">Memory Skills</span>
+          <h3 style="font-family: var(--font-main-heading); font-size: 1.3rem; margin-bottom: 1rem; line-height: 1.3;">Spatial Memory Palaces for Chemistry & Formulas</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 2rem; flex-grow: 1;">A deep-dive tutorial demonstrating how students map organic reactions, chemical elements, and long physics constants onto virtual rooms in their homes.</p>
+          <button onclick="readArticle('memory-palace')" class="blog-read-more" style="background: none; border: none; cursor: pointer; text-align: left; padding: 0;">Read Full Article <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Reader Modal -->
+  <div class="modal article-modal">
+    <div class="modal-content" style="max-width: 800px; max-height: 85vh; overflow-y: auto;">
+      <button onclick="closeArticleModal()" class="modal-close" aria-label="Close Article Modal">&times;</button>
+      <div id="article-read-container">
+        <!-- Injected via script -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-column">
+        <a href="index.html" class="footer-logo" style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
+          <img src="assets/logo.png" alt="Kabil Academy Logo" style="height: 55px; width: auto; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);">
+          KABIL<span>ACADEMY</span>
+        </a>
+        <p class="footer-desc">A complete student development academy dedicated to building strong foundations, creative innovation, and mental toughness for lifelong success.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/kabilacademyofficial" class="social-icon" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://youtube.com/@kabilacademyofficial" class="social-icon" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/918870850063" class="social-icon" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Offerings</h4>
+        <ul class="footer-links">
+          <li><a href="programs.html?program=academics">Academics</a></li>
+          <li><a href="programs.html?program=competitive">JEE/NEET Prep</a></li>
+          <li><a href="programs.html?program=stem">Robotics & Coding</a></li>
+          <li><a href="programs.html?program=sports">Sports Training</a></li>
+          <li><a href="programs.html?program=leadership">Public Speaking</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contact Info</h4>
+        <ul class="footer-links" style="color: var(--text-muted);">
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-phone-alt" style="color: var(--royal-gold); margin-right: 8px;"></i> 8870850063</li>
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-envelope" style="color: var(--royal-gold); margin-right: 8px;"></i> info@kabilacademy.in</li>
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-map-marker-alt" style="color: var(--royal-gold); margin-right: 8px;"></i> Coimbatore, Tamil Nadu</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Kabil Academy®. All rights reserved.</p>
+      <ul class="footer-legal-links">
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="refund.html">Refund Policy</a></li>
+        <li><a href="child-safety.html">Child Safety Policy</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Chat Widget -->
+  <a href="https://wa.me/918870850063" class="whatsapp-float" target="_blank" aria-label="Chat with Kabil Academy on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Article Articles Script Database -->
+  <script>
+    const articles = {
+      'learning-psych': {
+        title: "Understanding Cognitive Milestones in Modern Students",
+        meta: "Published on July 6, 2026 | By Coach Rajesh M. (Learning Psychology Lead)",
+        content: `
+          <p>Traditional classrooms are structured on the assumptions of the industrial revolution: uniform speed, sedentary listening, and memory-reproduction test sheets. In modern children, this creates strong cognitive friction, manifesting as attention drops, anxiety spikes, and a deep dislike of subjects like physics and mathematics.</p>
+          
+          <h4 style="margin: 1.5rem 0 0.8rem 0; color: var(--royal-gold);">The Threat of Stress Responses</h4>
+          <p>When a child is forced to memorize a mathematics formula without understanding its logic, the amygdala (the brain's threat filter) registers frustration. If this happens consistently, the brain shuts down its analytical prefrontal cortex during examinations. This is why children who study for hours can "blank out" in exam halls.</p>
+
+          <h4 style="margin: 1.5rem 0 0.8rem 0; color: var(--royal-gold);">How Kabil Adapts Cognitive Pathways</h4>
+          <p>Our methodology is built on active cognitive alignment. We break down complex concepts into interactive steps. By combining study periods with STEM experiments, physical basketball plays, and artistic dances, we release dopamine and endorphins. This keeps the prefrontal cortex relaxed and highly receptive, locking facts in long-term memory paths.</p>
+          
+          <p style="margin-top: 1.5rem; font-weight: bold; color: var(--royal-gold);">"We treat academic learning as an exploration, not an obligation."</p>
+        `
+      },
+      'study-tech': {
+        title: "Spaced Repetitions & Active Recall Methods",
+        meta: "Published on June 28, 2026 | By Teacher Divya K. (Academics Coordinator)",
+        content: `
+          <p>Passive reading—highlighting sentences or rereading a chapter three times—gives a false "illusion of competence." You feel like you know the content, but the details wash out of your brain within 48 hours. Here are the three study techniques we integrate into our daily coaching schedules:</p>
+          
+          <h4 style="margin: 1.5rem 0 0.8rem 0; color: var(--royal-gold);">1. Active Recall Drills</h4>
+          <p>Instead of reading, read once, close the book, and write down every concept you recall. This forces the brain to construct synaptic retrieval links. It is slightly harder than passive reading, but it creates 10x stronger memory retention.</p>
+
+          <h4 style="margin: 1.5rem 0 0.8rem 0; color: var(--royal-gold);">2. The Feynman Explanation Method</h4>
+          <p>Explain a complex concept (like Newton's Third Law or organic esterification) to a imaginary 8-year-old child. Avoid complex terminology. If you struggle to simplify the concept, it means your understanding has gaps. Focus on those gaps.</p>
+
+          <h4 style="margin: 1.5rem 0 0.8rem 0; color: var(--royal-gold);">3. Spaced Repetition Schedules</h4>
+          <p>Instead of cramming the night before boards, review the concepts at increasing intervals: 1 day, 3 days, 7 days, and 30 days after first learning. This interrupts the brain's natural "forgetting curve" and stores information in deep memory pathways.</p>
+        `
+      },
+      'memory-palace': {
+        title: "Spatial Memory Palaces for Chemistry & Formulas",
+        meta: "Published on June 15, 2026 | By Coach Sneha Pillai (Peak Performance Mentor)",
+        content: `
+          <p>Human brains did not evolve to remember abstract symbols on white paper. We evolved to remember physical pathways: where the river is, which trees are toxic, and where our shelter sits. The Memory Palace (or Method of Loci) turns this spatial mapping capability into an academic superpower.</p>
+          
+          <h4 style="margin: 1.5rem 0 0.8rem 0; color: var(--royal-gold);">Building the Spatial Palace</h4>
+          <p>Choose a physical location you know by heart, such as your home. Walk through it in your mind. Establish a sequence of specific places: the front door, the shoe rack, the living room couch, the television stand, the dining table.</p>
+
+          <h4 style="margin: 1.5rem 0 0.8rem 0; color: var(--royal-gold);">Encoding the Chemistry Parameters</h4>
+          <p>To remember the periodic table or organic compounds, place large, funny, animated characters in those spots. For example, imagine a large balloon filled with Hydrogen popping at your front door, a sparkling neon Helium balloon on the shoe rack, and a giant Lithium battery leaking green goo on your couch. Because these images are spatial and sensory, your brain recalls them instantly during tests.</p>
+          
+          <p style="margin-top: 1.5rem;">At Kabil Academy, we conduct regular workshops helping NEET & JEE foundation students construct their personal subject palaces to access formulas under pressure.</p>
+        `
+      }
+    };
+
+    function readArticle(articleKey) {
+      const article = articles[articleKey];
+      if (!article) return;
+
+      const container = document.getElementById('article-read-container');
+      container.innerHTML = `
+        <span style="font-size: 0.8rem; color: var(--royal-gold); font-weight: bold; text-transform: uppercase; letter-spacing: 2px;">Academy Insights</span>
+        <h2 style="font-family: var(--font-main-heading); font-size: 2rem; margin: 1rem 0 0.5rem 0; line-height: 1.2;">${article.title}</h2>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">${article.meta}</p>
+        <div style="font-size: 1rem; color: var(--text-secondary); line-height: 1.8; text-align: left;">
+          ${article.content}
+        </div>
+      `;
+
+      const modal = document.querySelector('.article-modal');
+      if (modal) modal.classList.add('active');
+    }
+
+    function closeArticleModal() {
+      const modal = document.querySelector('.article-modal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    document.addEventListener('click', (e) => {
+      const modal = document.querySelector('.article-modal');
+      if (modal && e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  </script>
+
+  <!-- Global JS -->
+  <script src="js/main.js"></script>
+</body>
+</html>

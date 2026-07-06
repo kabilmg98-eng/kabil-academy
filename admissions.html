@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admissions | Kabil Academy</title>
+  
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <meta name="description" content="Kabil Academy admissions roadmap, online application form, and future portal features catalog.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <div class="bg-glow-container">
+    <div class="bg-glow-blob blob-1"></div>
+    <div class="bg-glow-blob blob-2"></div>
+    <div class="bg-glow-blob blob-3"></div>
+  </div>
+
+  <!-- Header Section -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.png" alt="Kabil Academy Logo" style="height: 55px; width: auto; border-radius: 50%; border: 1px solid var(--border-color);">
+        KABIL<span>ACADEMY</span>
+      </a>
+      <button class="menu-btn" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="programs.html" class="nav-link">Programs</a></li>
+        <li><a href="admissions.html" class="nav-link active">Admissions</a></li>
+        <li><a href="events.html" class="nav-link">Events</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon moon-icon"></i>
+          <i class="fas fa-sun sun-icon"></i>
+        </button>
+        <a href="contact.html#consultation" class="btn btn-outline" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">Free Consult</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Intro Header -->
+  <section class="page-intro">
+    <div class="container">
+      <span class="section-tag">Enrollment</span>
+      <h1>Admissions <span>Portal</span></h1>
+      <p>Initiate your student development journey at Kabil Academy. Learn about the admission flow and preview future systems.</p>
+    </div>
+  </section>
+
+  <!-- Admissions Journey timeline -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-tag">Methodology</span>
+        <h2 class="section-title">Admissions Roadmap</h2>
+      </div>
+
+      <div class="journey-timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot"></div>
+          <div class="timeline-number">01</div>
+          <div class="timeline-card glass-card">
+            <h3>Admission Setup</h3>
+            <p>Start your application process below or contact our office.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot"></div>
+          <div class="timeline-number">02</div>
+          <div class="timeline-card glass-card">
+            <h3>Assessment Checks</h3>
+            <p>Benchmarking cognitive, academic, and physical parameters.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-dot"></div>
+          <div class="timeline-number">03</div>
+          <div class="timeline-card glass-card">
+            <h3>Personal Learning Plan</h3>
+            <p>Structure the customized development goals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admissions form & brochure -->
+  <section class="section-padding" style="background-color: var(--bg-secondary);">
+    <div class="container grid-2">
+      <!-- Brochure Card -->
+      <div class="fade-in">
+        <span class="section-tag">Prospectus</span>
+        <h2 class="section-title">Download Course Catalog</h2>
+        
+        <div class="glass-card" style="margin-top: 2rem; display: flex; align-items: center; gap: 20px; border-color: var(--royal-gold);">
+          <div style="font-size: 3rem; color: var(--royal-gold);"><i class="far fa-file-alt"></i></div>
+          <div>
+            <h4 style="margin-bottom: 5px;">Kabil Academy Catalog Blueprint</h4>
+            <a href="assets/kabil_academy_brochure.txt" download class="btn btn-outline" style="display: flex; margin-top: 1rem; padding: 0.5rem 1.2rem; font-size: 0.85rem; width: max-content;">Download Brochure <i class="fas fa-download"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Application Form -->
+      <div class="glass-card fade-in">
+        <h3 style="font-family: var(--font-main-heading); font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">Inquire for Admission</h3>
+        <form class="whatsapp-form">
+          <div class="form-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" id="studentName" name="name" class="form-control" placeholder="Enter student name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="parentPhone">Phone Number</label>
+            <input type="tel" id="parentPhone" name="phone" class="form-control" placeholder="Enter parent contact" required>
+          </div>
+
+          <div class="form-group">
+            <label for="studentGrade">Current Grade/Class</label>
+            <select id="studentGrade" name="grade" class="form-control" required>
+              <option value="">Select Grade</option>
+              <option value="Grades 1-5">Primary (Grades 1 - 5)</option>
+              <option value="Grades 6-8">Middle School (Grades 6 - 8)</option>
+              <option value="Grades 9-10">High School (Grades 9 - 10)</option>
+              <option value="Grades 11-12">Higher Secondary (Grades 11 - 12)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;"><i class="fab fa-whatsapp"></i> Inquire via WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Future Features Portal list -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-tag">System Portals</span>
+        <h2 class="section-title">Future Features</h2>
+      </div>
+
+      <div class="grid-4" style="gap: 1.5rem;">
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Online Admissions</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Student Portal</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Parent Portal</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Faculty Portal</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Learning Management System (LMS)</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Digital Library</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Attendance Tracking</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Assignments</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Online Tests</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Certificates</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">AI Learning Assistant</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Mobile Application</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Merchandise Store</div>
+        <div class="glass-card fade-in" style="padding: 1.5rem; text-align: center; font-size: 0.9rem;">Scholarship Portal</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-column">
+        <a href="index.html" class="footer-logo" style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
+          <img src="assets/logo.png" alt="Kabil Academy Logo" style="height: 55px; width: auto; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);">
+          KABIL<span>ACADEMY</span>
+        </a>
+        <p class="footer-desc">Kabil Academy is a complete student development academy dedicated to helping learners grow academically, physically, creatively, emotionally, and socially.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/kabilacademyofficial" class="social-icon" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://youtube.com/@kabilacademyofficial" class="social-icon" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/918870850063" class="social-icon" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Offerings</h4>
+        <ul class="footer-links">
+          <li><a href="programs/academic-excellence.html">Academic Excellence</a></li>
+          <li><a href="programs/neet-jee-foundation.html">NEET & JEE Prep</a></li>
+          <li><a href="programs/stem-innovation.html">STEM & Robotics</a></li>
+          <li><a href="programs/sports-development.html">Sports Training</a></li>
+          <li><a href="programs/leadership-communication.html">Public Speaking</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contact Info</h4>
+        <ul class="footer-links" style="color: var(--text-muted);">
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-phone-alt" style="color: var(--royal-gold); margin-right: 8px;"></i> 8870850063</li>
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-envelope" style="color: var(--royal-gold); margin-right: 8px;"></i> info@kabilacademy.in</li>
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-map-marker-alt" style="color: var(--royal-gold); margin-right: 8px;"></i> Coimbatore, Tamil Nadu</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Kabil Academy®. All rights reserved.</p>
+      <ul class="footer-legal-links">
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="refund.html">Refund Policy</a></li>
+        <li><a href="child-safety.html">Child Safety Policy</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/918870850063" class="whatsapp-float" target="_blank" aria-label="Chat with Kabil Academy on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

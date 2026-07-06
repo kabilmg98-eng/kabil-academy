@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Kabil Academy</title>
+  <meta name="description" content="View photos and video summaries of Kabil Academy students participating in STEM projects, sports leagues, dance showcases, and public speaking competitions.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Background Animated Blobs -->
+  <div class="bg-glow-container">
+    <div class="bg-glow-blob blob-1"></div>
+    <div class="bg-glow-blob blob-2"></div>
+    <div class="bg-glow-blob blob-3"></div>
+  </div>
+
+  <!-- Header Section -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.png" alt="Kabil Academy Logo" style="height: 55px; width: auto; border-radius: 50%; border: 1px solid var(--border-color);">
+        KABIL<span>ACADEMY</span>
+      </a>
+      <button class="menu-btn" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="programs.html" class="nav-link">Programs</a></li>
+        <li><a href="admissions.html" class="nav-link">Admissions</a></li>
+        <li><a href="events.html" class="nav-link">Events</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon moon-icon"></i>
+          <i class="fas fa-sun sun-icon"></i>
+        </button>
+        <a href="contact.html#consultation" class="btn btn-outline" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">Free Consult</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Intro Header -->
+  <section class="page-intro">
+    <div class="container">
+      <span class="section-tag">Visual Portfolio</span>
+      <h1>Academy <span>Gallery</span></h1>
+      <p>A visual summary of our students active in labs, sports courts, creative dance stages, and leadership summits.</p>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="section-padding">
+    <div class="container">
+      <!-- Filter tabs -->
+      <div class="programs-filter fade-in" style="margin-bottom: 3rem;">
+        <button class="filter-btn active" data-filter="all">All Portfolios</button>
+        <button class="filter-btn" data-filter="stem">STEM & Coding</button>
+        <button class="filter-btn" data-filter="sports">Sports</button>
+        <button class="filter-btn" data-filter="dance">Dance & Performing Arts</button>
+        <button class="filter-btn" data-filter="leadership">Leadership</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid fade-in">
+        <!-- Item 1: STEM robotics -->
+        <div class="gallery-item" data-category="stem">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%230E1A2B'/><circle cx='200' cy='150' r='60' stroke='%23D4AF37' stroke-width='4' fill='none' stroke-dasharray='10,5'/><path d='M200 60 L200 240 M110 150 L290 150' stroke='%2338BDF8' stroke-width='2' opacity='0.5'/><rect x='170' y='120' width='60' height='60' rx='5' fill='none' stroke='%23D4AF37' stroke-width='3'/><text x='50% ' y='85% ' fill='%23CBD5E1' font-family='sans-serif' font-size='14' text-anchor='middle'>Robotics & Arduino Lab</text></svg>" alt="STEM Robotics Lab Setup">
+          <div class="gallery-overlay">
+            <h4>Robotics Lab Setup</h4>
+            <p>STEM & Coding</p>
+          </div>
+        </div>
+
+        <!-- Item 2: Basketball Practice -->
+        <div class="gallery-item" data-category="sports">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%230E1A2B'/><path d='M50 50 L350 50 L350 250 L50 250 Z' fill='none' stroke='%2338BDF8' stroke-width='2' opacity='0.3'/><circle cx='200' cy='150' r='50' fill='none' stroke='%23D4AF37' stroke-width='3'/><path d='M200 50 L200 250' stroke='%2338BDF8' stroke-width='2' opacity='0.5'/><text x='50% ' y='85% ' fill='%23CBD5E1' font-family='sans-serif' font-size='14' text-anchor='middle'>Basketball Court Drills</text></svg>" alt="Basketball Drills">
+          <div class="gallery-overlay">
+            <h4>Basketball Drills</h4>
+            <p>Sports</p>
+          </div>
+        </div>
+
+        <!-- Item 3: Contemporary Stage -->
+        <div class="gallery-item" data-category="dance">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%230E1A2B'/><path d='M50 250 C 150 150, 250 150, 350 250' fill='none' stroke='%23D4AF37' stroke-width='3'/><path d='M200 50 L100 250 M200 50 L300 250' stroke='%2338BDF8' stroke-width='1.5' opacity='0.6'/><text x='50% ' y='85% ' fill='%23CBD5E1' font-family='sans-serif' font-size='14' text-anchor='middle'>Dance Showcase Rehearsal</text></svg>" alt="Dance Showcase">
+          <div class="gallery-overlay">
+            <h4>Dance Showcase</h4>
+            <p>Dance & Performing Arts</p>
+          </div>
+        </div>
+
+        <!-- Item 4: Public speaking podium -->
+        <div class="gallery-item" data-category="leadership">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%230E1A2B'/><rect x='170' y='180' width='60' height='80' fill='none' stroke='%23D4AF37' stroke-width='3'/><circle cx='200' cy='130' r='20' fill='none' stroke='%2338BDF8' stroke-width='2'/><path d='M150 260 L250 260' stroke='%23D4AF37' stroke-width='4'/><text x='50% ' y='85% ' fill='%23CBD5E1' font-family='sans-serif' font-size='14' text-anchor='middle'>Public Speaking Podium</text></svg>" alt="Leadership Podium Setup">
+          <div class="gallery-overlay">
+            <h4>Leadership Podium</h4>
+            <p>Leadership</p>
+          </div>
+        </div>
+
+        <!-- Item 5: Science Experiments -->
+        <div class="gallery-item" data-category="stem">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%230E1A2B'/><path d='M180 220 L220 220 L240 260 L160 260 Z' fill='none' stroke='%23D4AF37' stroke-width='3'/><path d='M180 220 L180 180 L220 180 L220 220' fill='none' stroke='%23D4AF37' stroke-width='3'/><path d='M200 180 L200 100' stroke='%2338BDF8' stroke-width='2'/><circle cx='200' cy='140' r='10' fill='%2338BDF8' opacity='0.7'/><text x='50% ' y='85% ' fill='%23CBD5E1' font-family='sans-serif' font-size='14' text-anchor='middle'>Science Lab Experiments</text></svg>" alt="Science Experiments">
+          <div class="gallery-overlay">
+            <h4>Science Experiments</h4>
+            <p>STEM & Coding</p>
+          </div>
+        </div>
+
+        <!-- Item 6: Badminton Practice -->
+        <div class="gallery-item" data-category="sports">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%230E1A2B'/><circle cx='200' cy='120' r='30' fill='none' stroke='%23D4AF37' stroke-width='2'/><path d='M170 120 L230 120 M200 90 L200 150' stroke='%23D4AF37' stroke-width='2'/><path d='M200 150 L200 240 L160 280 M200 240 L240 280' stroke='%2338BDF8' stroke-width='3'/><text x='50% ' y='85% ' fill='%23CBD5E1' font-family='sans-serif' font-size='14' text-anchor='middle'>Badminton Court Drills</text></svg>" alt="Badminton Practice">
+          <div class="gallery-overlay">
+            <h4>Badminton Court</h4>
+            <p>Sports</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-column">
+        <a href="index.html" class="footer-logo" style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
+          <img src="assets/logo.png" alt="Kabil Academy Logo" style="height: 55px; width: auto; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);">
+          KABIL<span>ACADEMY</span>
+        </a>
+        <p class="footer-desc">A complete student development academy dedicated to building strong foundations, creative innovation, and mental toughness for lifelong success.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/kabilacademyofficial" class="social-icon" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://youtube.com/@kabilacademyofficial" class="social-icon" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/918870850063" class="social-icon" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Offerings</h4>
+        <ul class="footer-links">
+          <li><a href="programs.html?program=academics">Academics</a></li>
+          <li><a href="programs.html?program=competitive">JEE/NEET Prep</a></li>
+          <li><a href="programs.html?program=stem">Robotics & Coding</a></li>
+          <li><a href="programs.html?program=sports">Sports Training</a></li>
+          <li><a href="programs.html?program=leadership">Public Speaking</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contact Info</h4>
+        <ul class="footer-links" style="color: var(--text-muted);">
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-phone-alt" style="color: var(--royal-gold); margin-right: 8px;"></i> 8870850063</li>
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-envelope" style="color: var(--royal-gold); margin-right: 8px;"></i> info@kabilacademy.in</li>
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-map-marker-alt" style="color: var(--royal-gold); margin-right: 8px;"></i> Coimbatore, Tamil Nadu</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Kabil Academy®. All rights reserved.</p>
+      <ul class="footer-legal-links">
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="refund.html">Refund Policy</a></li>
+        <li><a href="child-safety.html">Child Safety Policy</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Chat Widget -->
+  <a href="https://wa.me/918870850063" class="whatsapp-float" target="_blank" aria-label="Chat with Kabil Academy on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Global JS -->
+  <script src="js/main.js"></script>
+
+  <!-- Local Script for Gallery Filter -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const filter = btn.getAttribute('data-filter');
+          
+          galleryItems.forEach(item => {
+            if (filter === 'all' || item.getAttribute('data-category') === filter) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
