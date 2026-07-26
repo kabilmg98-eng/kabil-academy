@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Kabil Academy</title>
+  
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CryptoJS for secure client-side AES encryption -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  
+  <style>
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    @media (min-width: 992px) {
+      .admin-panel-active {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        max-width: 1200px;
+      }
+    }
+    .status-console {
+      background: #040d1a;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #38BDF8;
+      min-height: 180px;
+      max-height: 250px;
+      overflow-y: auto;
+      margin-top: 1rem;
+      line-height: 1.6;
+    }
+    .status-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.5rem;
+    }
+    .status-line.success { color: var(--emerald); }
+    .status-line.error { color: #f87171; }
+    .status-line.loading i {
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+    .hidden {
+      display: none !important;
+    }
+    .setup-code-box {
+      background: #0e1e38;
+      border: 1px solid var(--royal-gold);
+      color: var(--text-secondary);
+      padding: 1rem;
+      border-radius: 10px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      word-break: break-all;
+      margin-top: 1rem;
+      user-select: all;
+    }
+    /* Photo Manager Styles */
+    .photo-manager-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+    .photo-manager-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      padding: 0.8rem;
+      border-radius: 10px;
+    }
+    .photo-manager-thumb {
+      width: 60px;
+      height: 45px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #0e1a2b;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .photo-manager-info {
+      flex-grow: 1;
+    }
+    .photo-manager-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .photo-manager-cat {
+      font-size: 0.75rem;
+      color: var(--royal-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .btn-delete-photo {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn-delete-photo:hover {
+      background: #b91c1c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow-container">
+    <div class="bg-glow-blob blob-1"></div>
+    <div class="bg-glow-blob blob-2"></div>
+    <div class="bg-glow-blob blob-3"></div>
+  </div>
+
+  <!-- Header Section -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 10px;">
+        <img src="assets/logo.png" alt="Kabil Academy Logo" style="height: 55px; width: auto; border-radius: 50%; border: 1px solid var(--border-color);">
+        KABIL<span>ACADEMY</span>
+      </a>
+      <button class="menu-btn" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="programs.html" class="nav-link">Programs</a></li>
+        <li><a href="admissions.html" class="nav-link">Admissions</a></li>
+        <li><a href="events.html" class="nav-link">Events</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" aria-label="Toggle Dark/Light Mode">
+          <i class="fas fa-moon moon-icon"></i>
+          <i class="fas fa-sun sun-icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-intro" style="padding-top: 10rem; padding-bottom: 2rem;">
+    <div class="container">
+      <span class="section-tag">Management</span>
+      <h1>Admin <span>Dashboard</span></h1>
+      <p id="dashboard-subtitle">Sign in to upload new photos directly to your live gallery.</p>
+    </div>
+  </section>
+
+  <!-- Main Forms -->
+  <section class="section-padding" style="padding-top: 0;">
+    <div class="container">
+      <div class="admin-grid" id="mainAdminContainer">
+        
+        <!-- SECTION 1: LOGIN (Shown by default if encrypted config is present) -->
+        <div class="glass-card" id="loginCard">
+          <h3 style="font-family: var(--font-main-heading); font-size: 1.3rem; margin-bottom: 1rem; color: var(--white); display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-lock" style="color: var(--royal-gold);"></i> Admin Sign In
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+            Enter your secret password to unlock the uploader console.
+          </p>
+          
+          <form id="login-form">
+            <div class="form-group">
+              <label for="adminPassword">Password</label>
+              <input type="password" id="adminPassword" class="form-control" placeholder="Enter Admin Password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+              <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
+          </form>
+          <p id="loginError" style="color: #f87171; font-size: 0.85rem; margin-top: 1rem; text-align: center;" class="hidden">
+            Incorrect password. Please try again.
+          </p>
+        </div>
+
+        <!-- SECTION 2: FIRST-TIME SETUP (Shown if encrypted config is NOT present) -->
+        <div class="glass-card hidden" id="setupCard">
+          <h3 style="font-family: var(--font-main-heading); font-size: 1.3rem; margin-bottom: 1rem; color: var(--white); display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-cog" style="color: var(--royal-gold);"></i> First-Time Admin Setup
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.5;">
+            Create your encrypted config string. Enter your GitHub settings, and they will be safely scrambled using your password.
+          </p>
+          
+          <form id="setup-form">
+            <div class="form-group">
+              <label for="setupOwner">GitHub Username / Owner</label>
+              <input type="text" id="setupOwner" class="form-control" placeholder="e.g. blackbird001-crypto" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="setupRepo">Repository Name</label>
+              <input type="text" id="setupRepo" class="form-control" placeholder="e.g. website" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="setupToken">Personal Access Token (PAT)</label>
+              <input type="password" id="setupToken" class="form-control" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxx" required>
+            </div>
+
+            <div class="form-group">
+              <label for="setupPassword">Confirm Your Password</label>
+              <input type="text" id="setupPassword" class="form-control" value="Kabil@1999" readonly style="background-color: var(--bg-hover); color: var(--royal-gold); font-weight: bold; border-color: var(--border-hover);">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+              <i class="fas fa-key"></i> Generate Secure Config
+            </button>
+          </form>
+
+          <div id="setupOutputBox" class="hidden">
+            <h4 style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--white);">Your Secure Config Code:</h4>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0.5rem 0;">
+              Copy the text below and paste it in our chat. I will write it into the website code to complete your setup!
+            </p>
+            <div class="setup-code-box" id="generatedCode"></div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: UPLOADER PANEL (Left Side after Login) -->
+        <div class="glass-card hidden" id="uploadFormCard">
+          <h3 style="font-family: var(--font-main-heading); font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--white); display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-image" style="color: var(--royal-gold);"></i> Add Photo to Gallery
+          </h3>
+          
+          <form id="gallery-upload-form">
+            <div class="form-group">
+              <label for="photoFile">Choose Image File</label>
+              <input type="file" id="photoFile" class="form-control" accept="image/*" required>
+            </div>
+            
+            <div class="grid-2" style="gap: 1rem; margin-bottom: 0;">
+              <div class="form-group">
+                <label for="photoCategory">Gallery Category</label>
+                <select id="photoCategory" class="form-control" required>
+                  <option value="stem">STEM & Coding</option>
+                  <option value="sports">Sports</option>
+                  <option value="dance">Dance & Performing Arts</option>
+                  <option value="leadership">Leadership</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="photoTitle">Photo Title / Caption</label>
+                <input type="text" id="photoTitle" class="form-control" placeholder="e.g. Robotics Championship" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="photoAlt">Alt Text (Accessibility)</label>
+              <input type="text" id="photoAlt" class="form-control" placeholder="e.g. Students demonstrating Arduino rover board" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+              <i class="fas fa-cloud-upload-alt"></i> Upload & Commit to Gallery
+            </button>
+          </form>
+        </div>
+
+        <!-- SECTION 4: CONSOLE AND MANAGER (Right Side after Login) -->
+        <div class="glass-card hidden" id="uploadConsoleCard">
+          <h3 style="font-family: var(--font-main-heading); font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--white); display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-terminal" style="color: var(--royal-gold);"></i> Console Status
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Monitor your uploader actions below:</p>
+          <div class="status-console" id="consoleOutput">
+            <div class="status-line"><i class="fas fa-info-circle"></i> Ready to upload new photo. Select a photo on the left.</div>
+          </div>
+          
+          <!-- Manage Photos Section inside right card -->
+          <h3 style="font-family: var(--font-main-heading); font-size: 1.2rem; margin-top: 2rem; margin-bottom: 0.5rem; color: var(--white); display: flex; align-items: center; gap: 10px;">
+            <i class="fas fa-images" style="color: var(--royal-gold);"></i> Delete Photos
+          </h3>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Select a photo to remove it from the gallery page.</p>
+          
+          <div class="photo-manager-list" id="photoManagerList">
+            <div style="font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 1rem;">Loading gallery photos...</div>
+          </div>
+
+          <button id="logoutBtn" class="btn btn-outline" style="width: 100%; margin-top: 2rem;">
+            <i class="fas fa-sign-out-alt"></i> Sign Out
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-column">
+        <a href="index.html" class="footer-logo" style="display: flex; align-items: center; gap: 10px; margin-bottom: 1.5rem;">
+          <img src="assets/logo.png" alt="Kabil Academy Logo" style="height: 55px; width: auto; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);">
+          KABIL<span>ACADEMY</span>
+        </a>
+        <p class="footer-desc">Kabil Academy is a complete student development academy dedicated to helping learners grow academically, physically, creatively, emotionally, and socially.</p>
+        <div class="footer-socials">
+          <a href="https://instagram.com/kabilacademyofficial" class="social-icon" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://youtube.com/@kabilacademyofficial" class="social-icon" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/918870850063" class="social-icon" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Offerings</h4>
+        <ul class="footer-links">
+          <li><a href="programs/academic-excellence.html">Academic Excellence</a></li>
+          <li><a href="programs/neet-jee-foundation.html">NEET & JEE Prep</a></li>
+          <li><a href="programs/stem-innovation.html">STEM & Robotics</a></li>
+          <li><a href="programs/sports-development.html">Sports Training</a></li>
+          <li><a href="programs/leadership-communication.html">Public Speaking</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contact Info</h4>
+        <ul class="footer-links" style="color: var(--text-muted);">
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-phone-alt" style="color: var(--royal-gold); margin-right: 8px;"></i> 8870850063</li>
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-envelope" style="color: var(--royal-gold); margin-right: 8px;"></i> info@kabilacademy.in</li>
+          <li style="margin-bottom: 0.8rem;"><i class="fas fa-map-marker-alt" style="color: var(--royal-gold); margin-right: 8px;"></i> Coimbatore, Tamil Nadu</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Kabil Academy®. All rights reserved. <span style="margin-left: 15px; display: inline-block;">This website is made by <a href="https://blackbird001-crypto.github.io/portfilio/" target="_blank" style="color: var(--royal-gold); text-decoration: underline;">vijayasarwesvaran</a></span></p>
+      <ul class="footer-legal-links">
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms & Conditions</a></li>
+        <li><a href="refund.html">Refund Policy</a></li>
+        <li><a href="child-safety.html">Child Safety Policy</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  
+  <script>
+    /**
+     * ====================================================
+     * PASTE YOUR GENERATED SECURE CONFIG CODE BELOW INSTEAD OF ""
+     * Example: const ENCRYPTED_CONFIG = "U2FsdGVkX19...";
+     * ====================================================
+     */
+    const ENCRYPTED_CONFIG = "U2FsdGVkX1+mZgOILkUcc25v7yWwpyYygUf85Ywu6nMBZvH8c2j4f6DS7+K5CyLfSG7MoCDYgyi3vebuGUjJB8dJzXsA3Z3v4yMmNkL7eUco7QwxC/3WipiYEvO9M4OFwhw32G7y+rijFP7AaumSuSSMQSE9NOlD1+WPZwc1Kho=";
+
+    // Decrypted active credentials in memory
+    let activeConfig = null;
+    let cachedGalleryHtml = "";
+    let cachedGallerySha = "";
+
+    // Check if configuration exists
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginCard = document.getElementById('loginCard');
+      const setupCard = document.getElementById('setupCard');
+      const subtitle = document.getElementById('dashboard-subtitle');
+
+      if (!ENCRYPTED_CONFIG || ENCRYPTED_CONFIG.trim() === "") {
+        // Show setup uploader
+        loginCard.classList.add('hidden');
+        setupCard.classList.remove('hidden');
+        subtitle.innerText = "Complete first-time setup to configure uploader settings.";
+      } else {
+        // Show login
+        loginCard.classList.remove('hidden');
+        setupCard.classList.add('hidden');
+      }
+    });
+
+    // 1. FIRST TIME SETUP FORM SUBMISSION
+    document.getElementById('setup-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const owner = document.getElementById('setupOwner').value.trim();
+      const repo = document.getElementById('setupRepo').value.trim();
+      const token = document.getElementById('setupToken').value.trim();
+      const password = document.getElementById('setupPassword').value; // Always Kabil@1999
+      
+      const configObj = { owner, repo, token };
+      
+      try {
+        // Encrypt with password
+        const encrypted = CryptoJS.AES.encrypt(JSON.stringify(configObj), password).toString();
+        
+        document.getElementById('setupOutputBox').classList.remove('hidden');
+        document.getElementById('generatedCode').innerText = encrypted;
+        
+        // Scroll down to display the code
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+      } catch (err) {
+        alert("Encryption failed: " + err.message);
+      }
+    });
+
+    // 2. PASSWORD SIGN IN FORM SUBMISSION
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const password = document.getElementById('adminPassword').value;
+      const errorMsg = document.getElementById('loginError');
+      
+      try {
+        // Decrypt config
+        const decryptedBytes = CryptoJS.AES.decrypt(ENCRYPTED_CONFIG, password);
+        const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8);
+        
+        if (!decryptedText) {
+          throw new Error("Invalid password");
+        }
+        
+        activeConfig = JSON.parse(decryptedText);
+        
+        // Success login -> Swap views
+        document.getElementById('loginCard').classList.add('hidden');
+        document.getElementById('uploadFormCard').classList.remove('hidden');
+        document.getElementById('uploadConsoleCard').classList.remove('hidden');
+        document.getElementById('mainAdminContainer').classList.add('admin-panel-active');
+        document.getElementById('dashboard-subtitle').innerText = "Logged in as Administrator.";
+        
+        // Fetch existing photos list to display in the manager
+        loadExistingPhotos();
+      } catch (err) {
+        errorMsg.classList.remove('hidden');
+        console.error("Login failed:", err);
+      }
+    });
+
+    // 3. LOGOUT BUTTON
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      activeConfig = null;
+      document.getElementById('adminPassword').value = '';
+      document.getElementById('loginCard').classList.remove('hidden');
+      document.getElementById('uploadFormCard').classList.add('hidden');
+      document.getElementById('uploadConsoleCard').classList.add('hidden');
+      document.getElementById('mainAdminContainer').classList.remove('admin-panel-active');
+      document.getElementById('dashboard-subtitle').innerText = "Sign in to upload new photos directly to your live gallery.";
+      document.getElementById('loginError').classList.add('hidden');
+    });
+
+    // Logging helper
+    function log(message, type = 'info') {
+      const consoleOutput = document.getElementById('consoleOutput');
+      let icon = 'fa-info-circle';
+      if (type === 'success') icon = 'fa-check-circle';
+      if (type === 'error') icon = 'fa-exclamation-triangle';
+      if (type === 'loading') icon = 'fa-spinner fa-spin';
+      
+      const line = document.createElement('div');
+      line.className = `status-line ${type}`;
+      line.innerHTML = `<i class="fas ${icon}"></i> ${message}`;
+      consoleOutput.appendChild(line);
+      consoleOutput.scrollTop = consoleOutput.scrollHeight;
+    }
+
+    // Convert file to Base64
+    function fileToBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          const base64String = reader.result.split(',')[1];
+          resolve(base64String);
+        };
+        reader.onerror = error => reject(error);
+      });
+    }
+
+    // Load Existing Photos list from live gallery.html on GitHub
+    async function loadExistingPhotos() {
+      const listContainer = document.getElementById('photoManagerList');
+      listContainer.innerHTML = '<div style="font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 1rem;"><i class="fas fa-spinner fa-spin"></i> Loading current gallery photos...</div>';
+      
+      if (!activeConfig) return;
+      
+      try {
+        const galleryUrl = `https://api.github.com/repos/${activeConfig.owner}/${activeConfig.repo}/contents/gallery.html`;
+        const response = await fetch(galleryUrl, {
+          headers: {
+            'Authorization': `Bearer ${activeConfig.token}`,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to load gallery.html to list existing photos.');
+        }
+        
+        const galleryData = await response.json();
+        cachedGallerySha = galleryData.sha;
+        cachedGalleryHtml = decodeURIComponent(escape(atob(galleryData.content)));
+        
+        // Parse items out of cached HTML
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(cachedGalleryHtml, 'text/html');
+        const items = doc.querySelectorAll('.gallery-item');
+        
+        listContainer.innerHTML = '';
+        
+        if (items.length === 0) {
+          listContainer.innerHTML = '<div style="font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 1rem;">No photos found in gallery.html grid.</div>';
+          return;
+        }
+        
+        items.forEach((item, index) => {
+          const img = item.querySelector('img');
+          const titleEl = item.querySelector('h4');
+          const catEl = item.querySelector('.gallery-overlay p') || item.querySelector('p');
+          
+          const imgSrc = img ? img.getAttribute('src') : '';
+          const title = titleEl ? titleEl.innerText : `Photo #${index + 1}`;
+          const category = catEl ? catEl.innerText : 'General';
+          
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'photo-manager-item';
+          
+          // Image thumbnail check: if SVG data URI or local image path
+          let imgTagHtml = '';
+          if (imgSrc.startsWith('data:image/svg+xml')) {
+            // For placeholders, render a fallback visual or use the SVG
+            imgTagHtml = `<img class="photo-manager-thumb" src="assets/logo.png" alt="placeholder">`;
+          } else {
+            // Try fetching from the live repo raw content to avoid local path load issues in uploader
+            const rawUrl = `https://raw.githubusercontent.com/${activeConfig.owner}/${activeConfig.repo}/main/${imgSrc}`;
+            imgTagHtml = `<img class="photo-manager-thumb" src="${rawUrl}" onerror="this.src='assets/logo.png'" alt="${title}">`;
+          }
+          
+          itemDiv.innerHTML = `
+            ${imgTagHtml}
+            <div class="photo-manager-info">
+              <div class="photo-manager-title">${title}</div>
+              <div class="photo-manager-cat">${category}</div>
+            </div>
+            <button class="btn-delete-photo" onclick="deletePhoto(${index}, '${imgSrc}', '${title.replace(/'/g, "\\'")}')">
+              <i class="fas fa-trash-alt"></i> Delete
+            </button>
+          `;
+          listContainer.appendChild(itemDiv);
+        });
+        
+      } catch (err) {
+        listContainer.innerHTML = `<div style="font-size: 0.85rem; color: #f87171; text-align: center; padding: 1rem;">Error: ${err.message}</div>`;
+      }
+    }
+
+    // 4. DELETE PHOTO ACTION
+    window.deletePhoto = async function(index, imgSrc, title) {
+      if (!confirm(`Are you sure you want to delete "${title}"? This will edit the site code and remove it immediately.`)) {
+        return;
+      }
+      
+      const consoleOutput = document.getElementById('consoleOutput');
+      consoleOutput.innerHTML = ''; // Clear uploader logs
+      log(`Starting delete process for: "${title}"...`, 'info');
+      
+      try {
+        // Step 1: Re-fetch latest gallery.html to avoid commit conflicts (SHA mismatch)
+        log('Fetching latest gallery.html file from GitHub...', 'loading');
+        const galleryUrl = `https://api.github.com/repos/${activeConfig.owner}/${activeConfig.repo}/contents/gallery.html`;
+        let response = await fetch(galleryUrl, {
+          headers: {
+            'Authorization': `Bearer ${activeConfig.token}`,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to retrieve latest gallery file.');
+        }
+        
+        const galleryData = await response.json();
+        const latestSha = galleryData.sha;
+        const currentHtml = decodeURIComponent(escape(atob(galleryData.content)));
+        
+        // Step 2: Parse and locate item in HTML string
+        log('Locating image in gallery grid code...', 'loading');
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(currentHtml, 'text/html');
+        const items = doc.querySelectorAll('.gallery-item');
+        
+        let foundElementHtml = "";
+        items.forEach(item => {
+          const img = item.querySelector('img');
+          const h4 = item.querySelector('h4');
+          if (img && img.getAttribute('src') === imgSrc) {
+            foundElementHtml = item.outerHTML;
+          }
+        });
+        
+        if (!foundElementHtml) {
+          throw new Error('Photo tag markup was not found in the file. It may have already been deleted.');
+        }
+        
+        // Remove the element code from the HTML string
+        // We replace it and any surrounding comments
+        let updatedHtml = currentHtml.replace(foundElementHtml, '');
+        
+        // Clean up empty lines or comments around it if they exist
+        const commentPattern = `<!-- Added via Admin Dashboard -->\\s*`;
+        const regex = new RegExp(commentPattern, 'g');
+        updatedHtml = updatedHtml.replace(regex, '');
+
+        // Step 3: Commit updated gallery.html back
+        log('Updating gallery layout code in repository...', 'loading');
+        const base64UpdatedHtml = btoa(unescape(encodeURIComponent(updatedHtml)));
+        
+        response = await fetch(galleryUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${activeConfig.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github+json'
+          },
+          body: JSON.stringify({
+            message: `Admin: Delete gallery photo "${title}"`,
+            content: base64UpdatedHtml,
+            sha: latestSha
+          })
+        });
+        
+        if (!response.ok) {
+          const errData = await response.json();
+          throw new Error(`Failed to commit file removal: ${errData.message}`);
+        }
+        
+        log('Gallery layout updated on GitHub.', 'success');
+        
+        // Step 4: Optional file cleanup if image is stored in assets/gallery
+        if (imgSrc.startsWith('assets/gallery/')) {
+          log(`Cleaning up asset file: ${imgSrc}...`, 'loading');
+          const fileUrl = `https://api.github.com/repos/${activeConfig.owner}/${activeConfig.repo}/contents/${imgSrc}`;
+          
+          // We need the file SHA to delete it
+          const fileRes = await fetch(fileUrl, {
+            headers: {
+              'Authorization': `Bearer ${activeConfig.token}`,
+              'Accept': 'application/vnd.github+json'
+            }
+          });
+          
+          if (fileRes.ok) {
+            const fileData = await fileRes.json();
+            const fileSha = fileData.sha;
+            
+            // Delete file request
+            await fetch(fileUrl, {
+              method: 'DELETE',
+              headers: {
+                'Authorization': `Bearer ${activeConfig.token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/vnd.github+json'
+              },
+              body: JSON.stringify({
+                message: `Admin: Delete asset file for "${title}"`,
+                sha: fileSha
+              })
+            });
+            log('Associated image file removed from repository.', 'success');
+          }
+        }
+        
+        log('Success! Photo deleted successfully.', 'success');
+        log('Live website will rebuild in 1-2 minutes.', 'success');
+        
+        // Refresh manager list
+        loadExistingPhotos();
+        
+      } catch (err) {
+        log(`Delete Error: ${err.message}`, 'error');
+        console.error(err);
+      }
+    };
+
+    // 5. MAIN UPLOAD & COMMIT PROCESS
+    document.getElementById('gallery-upload-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const consoleOutput = document.getElementById('consoleOutput');
+      consoleOutput.innerHTML = ''; // Clear previous logs
+      
+      if (!activeConfig || !activeConfig.owner || !activeConfig.repo || !activeConfig.token) {
+        log('Session Error: Please log in again.', 'error');
+        return;
+      }
+      
+      const fileInput = document.getElementById('photoFile');
+      const category = document.getElementById('photoCategory').value;
+      const title = document.getElementById('photoTitle').value.trim();
+      const altText = document.getElementById('photoAlt').value.trim();
+      
+      if (!fileInput.files || fileInput.files.length === 0) {
+        log('Please select an image file.', 'error');
+        return;
+      }
+      
+      const file = fileInput.files[0];
+      const extension = file.name.split('.').pop().toLowerCase();
+      const safeTitle = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      const uniqueId = Date.now();
+      const imageFilename = `img_${safeTitle}_${uniqueId}.${extension}`;
+      const imagePath = `assets/gallery/${category}/${imageFilename}`;
+      
+      log('Initializing secure upload stream...', 'info');
+      
+      try {
+        // Step 1: Base64 Encoding
+        log('Processing and compressing image...', 'loading');
+        const base64Content = await fileToBase64(file);
+        log('Image processed.', 'success');
+        
+        // Step 2: Upload Image to Assets/Gallery/ via GitHub content API
+        log(`Uploading image to GitHub repository...`, 'loading');
+        const uploadImgUrl = `https://api.github.com/repos/${activeConfig.owner}/${activeConfig.repo}/contents/${imagePath}`;
+        
+        let response = await fetch(uploadImgUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${activeConfig.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github+json'
+          },
+          body: JSON.stringify({
+            message: `Upload gallery image: ${imageFilename}`,
+            content: base64Content
+          })
+        });
+        
+        if (!response.ok) {
+          const errData = await response.json();
+          throw new Error(`Failed to upload image: ${errData.message}`);
+        }
+        
+        log('Image file committed successfully.', 'success');
+        
+        // Step 3: Fetch current gallery.html
+        log('Fetching current gallery layout from GitHub...', 'loading');
+        const galleryUrl = `https://api.github.com/repos/${activeConfig.owner}/${activeConfig.repo}/contents/gallery.html`;
+        
+        response = await fetch(galleryUrl, {
+          headers: {
+            'Authorization': `Bearer ${activeConfig.token}`,
+            'Accept': 'application/vnd.github+json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error('Failed to download current gallery page.');
+        }
+        
+        const galleryData = await response.json();
+        const gallerySha = galleryData.sha;
+        const galleryHtml = decodeURIComponent(escape(atob(galleryData.content)));
+        log('Gallery file downloaded.', 'success');
+        
+        // Step 4: Parse & Inject new markup
+        log('Modifying gallery grid content...', 'loading');
+        
+        const targetString = '<div class="gallery-grid fade-in">';
+        const targetIndex = galleryHtml.indexOf(targetString);
+        
+        if (targetIndex === -1) {
+          throw new Error('Target layout container not found in gallery.html.');
+        }
+        
+        // Map category keys to display text
+        const categoryMap = {
+          'stem': 'STEM & Coding',
+          'sports': 'Sports',
+          'dance': 'Dance & Performing Arts',
+          'leadership': 'Leadership'
+        };
+        const categoryLabel = categoryMap[category] || 'General';
+        
+        // New Gallery Grid Item HTML
+        const newGalleryItem = `\n        <!-- Added via Admin Dashboard -->
+        <div class="gallery-item" data-category="${category}">
+          <img src="assets/gallery/${imageFilename}" alt="${altText}">
+          <div class="gallery-overlay">
+            <h4>${title}</h4>
+            <p>${categoryLabel}</p>
+          </div>
+        </div>`;
+        
+        // Inject right after target
+        const insertPosition = targetIndex + targetString.length;
+        const updatedHtml = galleryHtml.slice(0, insertPosition) + newGalleryItem + galleryHtml.slice(insertPosition);
+        
+        // Step 5: Save updated gallery.html back
+        log('Committing changes to repository...', 'loading');
+        
+        const base64UpdatedHtml = btoa(unescape(encodeURIComponent(updatedHtml)));
+        
+        response = await fetch(galleryUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${activeConfig.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github+json'
+          },
+          body: JSON.stringify({
+            message: `Admin: Add photo "${title}" to gallery layout`,
+            content: base64UpdatedHtml,
+            sha: gallerySha
+          })
+        });
+        
+        if (!response.ok) {
+          const errData = await response.json();
+          throw new Error(`Failed to commit layout update: ${errData.message}`);
+        }
+        
+        log('Layout committed to GitHub!', 'success');
+        log('Success! Photo uploaded and added to the gallery.', 'success');
+        log('Rebuilding live site (takes 1-2 minutes). You can view the changes on the gallery page shortly!', 'success');
+        
+        // Reset file form
+        document.getElementById('gallery-upload-form').reset();
+        
+        // Refresh manager list
+        loadExistingPhotos();
+        
+      } catch (error) {
+        log(`Error: ${error.message}`, 'error');
+        console.error(error);
+      }
+    });
+  </script>
+
+</body>
+</html>

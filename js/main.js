@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. Interactive Program Filtering (for programs.html)
   initProgramFiltering();
 
-  // 7. Lightbox Gallery (for gallery.html)
-  initLightbox();
+  // 7. Lightbox Gallery (for gallery.html) - Disabled in favor of the advanced uploader uploader in gallery.html
+  // initLightbox();
 
   // 8. Custom Particles Background (for hero section)
   initParticlesBg();
