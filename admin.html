@@ -302,7 +302,8 @@
           <h3 style="font-family: var(--font-main-heading); font-size: 1.2rem; margin-top: 2rem; margin-bottom: 0.5rem; color: var(--white); display: flex; align-items: center; gap: 10px;">
             <i class="fas fa-images" style="color: var(--royal-gold);"></i> Delete Photos
           </h3>
-          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Select a photo to remove it from the gallery page.</p>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">Select a photo to remove it from the gallery page.</p>
+          <button id="refreshPhotosBtn" style="font-size:0.78rem; background:none; border:1px solid var(--border-color); color:var(--text-muted); padding:0.3rem 0.8rem; border-radius:6px; cursor:pointer; margin-bottom:1rem;"><i class="fas fa-sync-alt"></i> Refresh List</button>
           
           <div class="photo-manager-list" id="photoManagerList">
             <div style="font-size: 0.85rem; color: var(--text-muted); text-align: center; padding: 1rem;">Loading gallery photos...</div>
@@ -493,6 +494,11 @@
       document.getElementById('loginError').classList.add('hidden');
     });
 
+    // 3b. REFRESH PHOTOS BUTTON
+    document.getElementById('refreshPhotosBtn').addEventListener('click', () => {
+      loadExistingPhotos();
+    });
+
     // Logging helper
     function log(message, type = 'info') {
       const consoleOutput = document.getElementById('consoleOutput');
@@ -563,8 +569,8 @@
           const catEl = item.querySelector('.gallery-overlay p') || item.querySelector('p');
           
           const imgSrc = img ? img.getAttribute('src') : '';
-          const title = titleEl ? titleEl.innerText : `Photo #${index + 1}`;
-          const category = catEl ? catEl.innerText : 'General';
+          const title = titleEl ? titleEl.textContent.trim() : `Photo #${index + 1}`;
+          const category = catEl ? catEl.textContent.trim() : 'General';
           
           const itemDiv = document.createElement('div');
           itemDiv.className = 'photo-manager-item';
@@ -586,12 +592,25 @@
               <div class="photo-manager-title">${title}</div>
               <div class="photo-manager-cat">${category}</div>
             </div>
-            <button class="btn-delete-photo" onclick="deletePhoto(${index}, '${imgSrc}', '${title.replace(/'/g, "\\'")}')">
+            <button class="btn-delete-photo"
+              data-index="${index}"
+              data-src="${imgSrc}"
+              data-title="${title.replace(/"/g, '&quot;')}">
               <i class="fas fa-trash-alt"></i> Delete
             </button>
           `;
           listContainer.appendChild(itemDiv);
         });
+
+        // Delegated event listener for delete buttons
+        listContainer.addEventListener('click', (e) => {
+          const btn = e.target.closest('.btn-delete-photo');
+          if (!btn) return;
+          const idx = parseInt(btn.dataset.index);
+          const src = btn.dataset.src;
+          const ttl = btn.dataset.title;
+          deletePhoto(idx, src, ttl);
+        }, { once: true }); // re-added each time loadExistingPhotos runs
         
       } catch (err) {
         listContainer.innerHTML = `<div style="font-size: 0.85rem; color: #f87171; text-align: center; padding: 1rem;">Error: ${err.message}</div>`;
@@ -829,7 +848,7 @@
         // New Gallery Grid Item HTML
         const newGalleryItem = `\n        <!-- Added via Admin Dashboard -->
         <div class="gallery-item" data-category="${category}">
-          <img src="assets/gallery/${imageFilename}" alt="${altText}">
+          <img src="assets/gallery/${category}/${imageFilename}" alt="${altText}">
           <div class="gallery-overlay">
             <h4>${title}</h4>
             <p>${categoryLabel}</p>
