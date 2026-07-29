@@ -602,7 +602,7 @@
           listContainer.appendChild(itemDiv);
         });
 
-        // Delegated event listener for delete buttons
+        // Delegated event listener for delete buttons (persistent, not once)
         listContainer.addEventListener('click', (e) => {
           const btn = e.target.closest('.btn-delete-photo');
           if (!btn) return;
@@ -610,7 +610,7 @@
           const src = btn.dataset.src;
           const ttl = btn.dataset.title;
           deletePhoto(idx, src, ttl);
-        }, { once: true }); // re-added each time loadExistingPhotos runs
+        });
         
       } catch (err) {
         listContainer.innerHTML = `<div style="font-size: 0.85rem; color: #f87171; text-align: center; padding: 1rem;">Error: ${err.message}</div>`;
@@ -646,33 +646,26 @@
         const latestSha = galleryData.sha;
         const currentHtml = decodeURIComponent(escape(atob(galleryData.content)));
         
-        // Step 2: Parse and locate item in HTML string
-        log('Locating image in gallery grid code...', 'loading');
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(currentHtml, 'text/html');
-        const items = doc.querySelectorAll('.gallery-item');
-        
-        let foundElementHtml = "";
-        items.forEach(item => {
-          const img = item.querySelector('img');
-          const h4 = item.querySelector('h4');
-          if (img && img.getAttribute('src') === imgSrc) {
-            foundElementHtml = item.outerHTML;
-          }
-        });
-        
-        if (!foundElementHtml) {
-          throw new Error('Photo tag markup was not found in the file. It may have already been deleted.');
+        // Step 2: Remove the gallery-item block using a reliable src-based regex
+        // (outerHTML from DOMParser reformats HTML, so string matching is used on raw HTML directly)
+        log('Locating and removing image from gallery code...', 'loading');
+
+        // Escape the imgSrc for use in a regex
+        const escapedSrc = imgSrc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        // Match the full <div class="gallery-item"...>...</div> block that contains this src
+        const itemRegex = new RegExp(
+          `\\s*(?:<!\\-\\-[^>]*\\-\\->\\s*)?<div[^>]+class=["'][^"']*gallery-item[^"']*["'][^>]*>[\\s\\S]*?src=["']${escapedSrc}["'][\\s\\S]*?<\\/div>\\s*<\\/div>`,
+          'i'
+        );
+
+        if (!itemRegex.test(currentHtml)) {
+          throw new Error('Photo markup was not found in the gallery file. It may have already been deleted.');
         }
-        
-        // Remove the element code from the HTML string
-        // We replace it and any surrounding comments
-        let updatedHtml = currentHtml.replace(foundElementHtml, '');
-        
-        // Clean up empty lines or comments around it if they exist
-        const commentPattern = `<!-- Added via Admin Dashboard -->\\s*`;
-        const regex = new RegExp(commentPattern, 'g');
-        updatedHtml = updatedHtml.replace(regex, '');
+
+        let updatedHtml = currentHtml.replace(itemRegex, '\n');
+
+        // Clean up any leftover admin comments
+        updatedHtml = updatedHtml.replace(/<!--\s*Added via Admin Dashboard\s*-->\s*/g, '');
 
         // Step 3: Commit updated gallery.html back
         log('Updating gallery layout code in repository...', 'loading');
